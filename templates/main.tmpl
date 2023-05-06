@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ah! I really didnt expect you to be here, Nevertheless, i am glad you made this far. I cannot say how much i love you.</title>
+  <style type="text/css" media="screen">
+    @import url("../assets/index.css");
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Ah! I really didn't expect you to be here.</h1>
+  </header>
+
+  <div id="gistcontainer">
+    {{ range .gists }}
+    <h1>{{.title}}</h1>
+    <div class="column2" id="{{.title}}">
+      <script src="{{.link}}"></script>
+    </div>
+    {{ end }}
+  </div>
+
+  <footer>
+    Copyright © me.com
+  </footer>
+
+</body>
+
+</html>
