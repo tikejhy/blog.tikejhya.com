@@ -4,7 +4,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -52,11 +51,9 @@ func main() {
 				all_tags = append(all_tags, tagsData)
 			}
 		}
-		fmt.Println(all_tags)
 		srMap := make(map[SumRecord]int)
 		// loop over records
 		for _, value := range all_tags {
-			fmt.Println(value["tags"])	
 			sr := SumRecord{
 				Tag: value["tags"],
 			}
@@ -68,7 +65,6 @@ func main() {
 		for sr, weight := range srMap {
 			tag_weight[sr.Tag] = weight
 		}
-		fmt.Println(tag_weight)
 
 		// create a slice of maps to store the data for each iteration of the loop.
 		// make([]map[string]string, 0) creates an empty slice of maps with string keys and string values.
