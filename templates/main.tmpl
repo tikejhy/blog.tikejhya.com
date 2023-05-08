@@ -2,30 +2,64 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Ah! I really didnt expect you to be here, Nevertheless, i am glad you made this far. I cannot say how much i love you.</title>
-  <style type="text/css" media="screen">
-    @import url("../assets/index.css");
-  </style>
+  <link rel="stylesheet" href="/assets/index.css">
+  <script src="/assets/script.js"></script>
+  <title>*UCK OFF</title>  
 </head>
 
 <body>
-  <header>
-    <h1>Ah! I really didn't expect you to be here.</h1>
-  </header>
 
-  <div id="gistcontainer">
-    {{ range .gists }}
-    <h1>{{.title}}</h1>
-    <div class="column2" id="{{.title}}">
-      <script src="{{.link}}"></script>
-    </div>
-    {{ end }}
+<div class="header">
+  <h1>Ah! I really didn't expect you to be here.</h1>
+  <p>Since you are here, i am glad you made this far.</p>
+</div>
+
+<div class="topnav">
+  <a href="#">whoami</a>
+  <a href="#">ifconfig</a>
+  <a href="#">man</a>
+  <a href="#">which</a>
+  <a href="#">clear</a>
+  <a href="javascript:closeWindow();" style="float:right">Kill -9</a>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div id="gistcontainer">
+        {{ range .gists }}
+        <h1>{{.title}}</h1>
+        <div class="column2" id="{{.title}}">
+          <script src="{{.link}}"></script>
+        </div>
+        {{ end }}
+      </div>
   </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h3>Tags</h3>
+        <div id="cloud">
+          <ul class="cloud" role="navigation" aria-label="Webdev word cloud">
+            {{range $tag, $count := .tag_weight}}
+              <li><a href="#{{ $tag }}" data-weight="{{ $count }}">{{ $tag }}</a></li>
+            {{ end }}
+          </ul>
+        </div>
+    </div>
+     <div class="card">
+      <h2>About Me</h2>
+        <img src="https://cdnb.artstation.com/p/assets/images/images/001/503/167/large/max-gavr-los-mariarchi.jpg" alt="Cowboy From Hell">
+        <div id="text">Cowboy from hell</div>
+     </div>
+    <div class="card">
+      <h3>Follow Me</h3>
+      <p>Some text..</p>
+    </div>
+  </div>
+</div>
 
-  <footer>
-    Copyright © me.com
-  </footer>
+<div class="footer">
+  <h2>Copyright © "Who gives a duck"</h2>
+</div>
 
 </body>
-
 </html>

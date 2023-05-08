@@ -4,6 +4,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -14,6 +15,11 @@ import (
 type Gist struct {
 	Title string `yaml:"title"`
 	Link  string `yaml:"link"`
+	Tags  []string `yaml:"tags"`
+}
+
+type SumRecord struct {
+    Tag string
 }
 
 func main() {
@@ -35,22 +41,51 @@ func main() {
 	}
 
 	r.GET("/", func(c *gin.Context) {
+		//all_tags to []map[string]string (a slice of maps with string keys and string values) 
+		all_tags := make([]map[string]string, 0)
+		for _, gist := range data_two["ghGists"] {
+			for _, tags := range gist.Tags {
+				//tagsData to a map[string]string
+				tagsData := map[string]string{
+					"tags": tags,
+				}
+				all_tags = append(all_tags, tagsData)
+			}
+		}
+		fmt.Println(all_tags)
+		srMap := make(map[SumRecord]int)
+		// loop over records
+		for _, value := range all_tags {
+			fmt.Println(value["tags"])	
+			sr := SumRecord{
+				Tag: value["tags"],
+			}
+			//creates new counter or increments existing pair counter by 1
+			srMap[sr] += 1
+		}
+
+		tag_weight := make(map[string]int)
+		for sr, weight := range srMap {
+			tag_weight[sr.Tag] = weight
+		}
+		fmt.Println(tag_weight)
+
 		// create a slice of maps to store the data for each iteration of the loop.
 		// make([]map[string]string, 0) creates an empty slice of maps with string keys and string values.
 		// the second argument 0 is specifying the initial length of the slice as zero.
 		gists := make([]map[string]string, 0)
-	
 		for _, gist := range data_two["ghGists"] {
 			gistData := map[string]string{
 				"title": gist.Title,
 				"link":  gist.Link,
-			}
+			}	
 			gists = append(gists, gistData)
 		}
 
 		// Then pass this slice to the c.HTML method to render the template.
 		c.HTML(http.StatusOK, "main.tmpl", gin.H{
 			"gists": gists,
+			"tag_weight": tag_weight,
 		})
 	})
 
