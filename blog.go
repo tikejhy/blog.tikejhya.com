@@ -4,6 +4,8 @@
 package main
 
 import (
+	"strings"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -85,9 +87,63 @@ func main() {
 		})
 	})
 
-	// Start the server
+	r.GET("/tags/:name", func(c *gin.Context) {
+		name := c.Param("name")
+		data := loadYAML("gist.yaml", name)
+		for _, gist := range data {
+			gistData := map[string]string{
+				"title": gist.Title,
+				"link":  gist.Link,
+			}
+			fmt.Println("gist")
+			fmt.Println(gistData)
+			// data = append(data, gistData)
+		}
+		// Then pass this slice to the c.HTML method to render the template.
+		c.HTML(http.StatusOK, "tags.tmpl", gin.H{
+			"gists": data,
+		})
+	})
+
+
+	//Start the server
 	err = r.Run(":8080")
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+
+
+func loadYAML(filename string, tag string) ([]Gist) {
+	// Read YAML file
+	yamlFile, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil
+	}
+
+	// Unmarshal YAML data into a slice of Gist structs
+	var data map[string][]Gist
+	err = yaml.Unmarshal(yamlFile, &data)
+	if err != nil {
+		return nil
+	}
+
+	fmt.Println(data["ghGists"])
+	gists := make([]map[string]string, 0)
+	for _, gist := range data["ghGists"] {
+		for _, tags := range gist.Tags {
+			//tagsData to a map[string]string
+			dataTags := map[string]string{
+				"gists": "gists",
+			}
+			if strings.Contains(tags, tag) {
+				gists = append(gists, dataTags)
+				
+			}
+		}
+	}
+	fmt.Println("------")
+	fmt.Println(gists)
+	return data["ghGists"]
 }

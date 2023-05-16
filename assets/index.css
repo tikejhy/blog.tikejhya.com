@@ -54,7 +54,7 @@ body {
   float: left;
   width: 23%;
   /* background-color: #ffffff; */
-  padding-left: 25px;
+  padding-left: 10px;
 }
 
 /* Fake image */
@@ -86,6 +86,7 @@ img:hover {
   background-color: white;
   padding: 10px;
   margin-top: 10px;
+  border-radius: 10px;
 }
 
 /* Clear floats after the columns */
@@ -133,7 +134,7 @@ ul.cloud {
   align-items: center;
   justify-content: center;
   line-height: 2.75rem;
-  width: 320px;
+  width: 100%;
 }
 
 ul.cloud a {
@@ -179,6 +180,9 @@ ul[data-show-value] a::after {
 ul.cloud li:nth-child(2n+1) a { --color: #181; }
 ul.cloud li:nth-child(3n+1) a { --color: #33a; }
 ul.cloud li:nth-child(4n+1) a { --color: #c38; }
+ul.cloud li:nth-child(5n+1) a { --color: rgb(31, 10, 54); }
+ul.cloud li:nth-child(6n+1) a { --color: rgb(111, 20, 82); }
+ul.cloud li:nth-child(7n+1) a { --color: rgb(232, 209, 31); }
 
 ul.cloud a:focus {
   outline: 1px dashed;
