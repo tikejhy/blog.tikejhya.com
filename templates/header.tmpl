@@ -23,16 +23,6 @@
   <a href="javascript:closeWindow();" style="float:right">Kill -9</a>
 </div>
 
-<div class="card">
-  <div id="cloud">
-    <ul class="cloud" role="navigation" aria-label="Webdev word cloud">
-      {{range $tag, $count := .tag_weight}}
-        <li><a href="#{{ $tag }}" data-weight="{{ $count }}">{{ $tag }}</a></li>
-      {{ end }}
-    </ul>
-  </div>
-</div>
-
 </body>
 </html>
 

@@ -1,14 +1,21 @@
 {{ template "templates/header.tmpl" .}}
 
+<div class="card">
+  <div id="cloud">
+    <ul class="cloud" role="navigation" aria-label="Webdev word cloud">
+      <li>tags/#{{ .name }}</li>
+    </ul>
+  </div>
+</div>
+<br>
 <div class="row">
   <div class="leftcolumn">
     <div id="gistcontainer">
-        <h1>{{.name}}</h1>
         <div class="column2" id="test">
           <script src="https://gist.github.com/tikejhy/bfad65ec364d553b25453544c46f19a2.js"></script>
         </div>
       </div>
   </div>
-  
+
 {{ template "templates/right_column.tmpl" .}}
 {{ template "templates/footer.tmpl" .}}
