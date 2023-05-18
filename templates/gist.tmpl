@@ -1,0 +1,13 @@
+{{ define "templates/gist.tmpl" }}
+<div class="row">
+  <div class="leftcolumn">
+    <div id="gistcontainer">
+        {{ range .gists }}
+        <h1>{{.title}}</h1>
+        <div class="column2" id="{{.title}}">
+          <script src="{{.link}}"></script>
+        </div>
+        {{ end }}
+      </div>
+  </div>
+{{ end }}

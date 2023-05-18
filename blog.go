@@ -5,7 +5,7 @@ package main
 
 import (
 	"strings"
-	"fmt"
+	
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -91,17 +91,18 @@ func main() {
 		name := c.Param("name")
 		data := loadYAML("gist.yaml", name)
 		for _, gist := range data {
-			gistData := map[string]string{
+			_ = map[string]string{
 				"title": gist.Title,
 				"link":  gist.Link,
 			}
-			fmt.Println("gist")
-			fmt.Println(gistData)
-			// data = append(data, gistData)
+			// fmt.Println("gist")
+			// fmt.Println(gistData)
+			// // data = append(data, gistData)
 		}
 		// Then pass this slice to the c.HTML method to render the template.
 		c.HTML(http.StatusOK, "tags.tmpl", gin.H{
 			"gists": data,
+			"name": name,
 		})
 	})
 
@@ -129,7 +130,7 @@ func loadYAML(filename string, tag string) ([]Gist) {
 		return nil
 	}
 
-	fmt.Println(data["ghGists"])
+	// fmt.Println(data["ghGists"])
 	gists := make([]map[string]string, 0)
 	for _, gist := range data["ghGists"] {
 		for _, tags := range gist.Tags {
@@ -143,7 +144,7 @@ func loadYAML(filename string, tag string) ([]Gist) {
 			}
 		}
 	}
-	fmt.Println("------")
-	fmt.Println(gists)
+	// fmt.Println("------")
+	// fmt.Println(gists)
 	return data["ghGists"]
 }
