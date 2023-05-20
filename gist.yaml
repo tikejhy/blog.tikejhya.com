@@ -2,51 +2,58 @@ ghGists:
 - title: Print line between two patterns with AWK
   link: https://gist.github.com/tikejhy/d29f4bcfc2105fcfa33acac20d302ed5.js
   tags:
-  - awk
-  - linux
-  - linux
-  - linux
+    - awk
+    - linux
 - title: Nginx cache cleanup
   link: https://gist.github.com/tikejhy/31c60528ccc425f2db37e2bf9432f430.js
   tags:
-  - nginx
-  - nginx
-  - nginx
-  - nginx
+    - nginx
+    - proxy
 - title: "Golang: Loop through yaml"
   link: https://gist.github.com/tikejhy/24e28fa7e5528e554aaaf50953115358.js
   tags:
-  - golang
-  - go
-  - yaml
+    - golang
+    - go
+    - yaml
 - title: "Multistage dockerfile go app"
   link: https://gist.github.com/tikejhy/77b1e8786d252640322f4d2f196cbd9b.js
   tags:
-  - go
-  - dockerfile
+    - go
+    - dockerfile
+    - multistage dockerfile
 - title: "Check SSL details at the command line"
   link: https://gist.github.com/tikejhy/4eeee065b8a2e6b0915692a74960432d.js
   tags:
-  - openssl
-  - bash
-  - bash
-  - bash
-  - bash
+    - openssl
+    - bash
 - title: "Nginx cache cleanup"
   link: https://gist.github.com/tikejhy/31c60528ccc425f2db37e2bf9432f430.js
   tags:
-  - nginx
-  - nginx cli
+    - nginx
+    - nginx cli
 - title: "Golang: Get private ip by tag"
   link: https://gist.github.com/tikejhy/3ab301e72009049ea1ef4073ca8b3027.js
   tags:
-  - golang
-  - aws
-  - tags
+    - go
+    - golang
+    - aws
 - title: "Go snippet to count occurrence and reuse value into different type of map"
   link: https://gist.github.com/tikejhy/bfad65ec364d553b25453544c46f19a2.js
   tags:
-  - golang
-  - golang
-  - golang
-  - counter
+    - go
+    - golang
+    - counter
+    - map
+- title: "could not build optimal proxy_headers_hash"
+  link: https://gist.github.com/tikejhy/3b4b1f60d0afcc62f7a3986d58065996.js
+  tags:
+    - nginx
+    - proxy
+- title: "Golang data types"
+  link: https://gist.github.com/tikejhy/e32d111531f432e533dfb5f46b0a61e4.js
+  tags:
+    - golang
+    - go
+    - datatypes
+    - string
+    - map

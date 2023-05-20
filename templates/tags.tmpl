@@ -1,9 +1,8 @@
 {{ template "templates/header.tmpl" .}}
-
 <div class="card">
   <div id="cloud">
     <ul class="cloud" role="navigation" aria-label="Webdev word cloud">
-      <li>tags/#{{ .name }}</li>
+      <li>tags/{{ .name }}</li>
     </ul>
   </div>
 </div>
@@ -12,7 +11,12 @@
   <div class="leftcolumn">
     <div id="gistcontainer">
         <div class="column2" id="test">
-          <script src="https://gist.github.com/tikejhy/bfad65ec364d553b25453544c46f19a2.js"></script>
+        {{ range .gists }}
+          <h1>{{.title}}</h1>
+          <div class="column2" id="{{.name}}">
+            <script src="{{.link}}"></script>
+          </div>
+          {{ end }}
         </div>
       </div>
   </div>

@@ -4,7 +4,7 @@
   <div id="cloud">
     <ul class="cloud" role="navigation" aria-label="Webdev word cloud">
       {{range $tag, $count := .tag_weight}}
-        <li><a href="#{{ $tag }}" data-weight="{{ $count }}">{{ $tag }}</a></li>
+        <li><a href="/tags/{{ $tag }}" data-weight="{{ $count }}">{{ $tag }}</a></li>
       {{ end }}
     </ul>
   </div>

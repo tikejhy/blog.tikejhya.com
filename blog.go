@@ -4,23 +4,23 @@
 package main
 
 import (
-	"strings"
-	
 	"io/ioutil"
 	"log"
 	"net/http"
-	"gopkg.in/yaml.v3"
+	"strings"
+
 	"github.com/gin-gonic/gin"
+	"gopkg.in/yaml.v3"
 )
 
 type Gist struct {
-	Title string `yaml:"title"`
-	Link  string `yaml:"link"`
+	Title string   `yaml:"title"`
+	Link  string   `yaml:"link"`
 	Tags  []string `yaml:"tags"`
 }
 
 type SumRecord struct {
-    Tag string
+	Tag string
 }
 
 func main() {
@@ -42,7 +42,7 @@ func main() {
 	}
 
 	r.GET("/", func(c *gin.Context) {
-		//all_tags to []map[string]string (a slice of maps with string keys and string values) 
+		//all_tags to []map[string]string (a slice of maps with string keys and string values)
 		all_tags := make([]map[string]string, 0)
 		for _, gist := range data_two["ghGists"] {
 			for _, tags := range gist.Tags {
@@ -76,13 +76,13 @@ func main() {
 			gistData := map[string]string{
 				"title": gist.Title,
 				"link":  gist.Link,
-			}	
+			}
 			gists = append(gists, gistData)
 		}
 
 		// Then pass this slice to the c.HTML method to render the template.
 		c.HTML(http.StatusOK, "main.tmpl", gin.H{
-			"gists": gists,
+			"gists":      gists,
 			"tag_weight": tag_weight,
 		})
 	})
@@ -90,22 +90,25 @@ func main() {
 	r.GET("/tags/:name", func(c *gin.Context) {
 		name := c.Param("name")
 		data := loadYAML("gist.yaml", name)
+		gistdata := make([]map[string]string, 0)
 		for _, gist := range data {
-			_ = map[string]string{
-				"title": gist.Title,
-				"link":  gist.Link,
+			link := map[string]string{
+				"link": gist.Link,
 			}
-			// fmt.Println("gist")
-			// fmt.Println(gistData)
-			// // data = append(data, gistData)
+
+			for _, value := range gist.Tags {
+				if value == name {
+					gistdata = append(gistdata, link)
+
+				}
+			}
 		}
-		// Then pass this slice to the c.HTML method to render the template.
+
 		c.HTML(http.StatusOK, "tags.tmpl", gin.H{
-			"gists": data,
-			"name": name,
+			"gists": gistdata,
+			"name":  name,
 		})
 	})
-
 
 	//Start the server
 	err = r.Run(":8080")
@@ -114,9 +117,7 @@ func main() {
 	}
 }
 
-
-
-func loadYAML(filename string, tag string) ([]Gist) {
+func loadYAML(filename string, tag string) []Gist {
 	// Read YAML file
 	yamlFile, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -140,11 +141,9 @@ func loadYAML(filename string, tag string) ([]Gist) {
 			}
 			if strings.Contains(tags, tag) {
 				gists = append(gists, dataTags)
-				
+
 			}
 		}
 	}
-	// fmt.Println("------")
-	// fmt.Println(gists)
 	return data["ghGists"]
 }
